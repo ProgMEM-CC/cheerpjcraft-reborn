@@ -58,7 +58,7 @@
 				"/lt/8/lib/tzdb.dat": [0, 131072]
 			}
 		});
-		await cheerpjCreateDisplay(-1, -1, document.body);
+		await cheerpjCreateDisplay(-1, -1, display);
 
 		hideElement(loading);
 		showElement(intro);
