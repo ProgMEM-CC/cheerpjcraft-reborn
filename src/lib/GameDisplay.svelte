@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { tryPlausible, showElement, hideElement } from "./utilities";
+	import { tryPlausible, showElement, hideElement } from './utilities';
 	import spinnerWhite from '$lib/assets/loading-spinner-white.svg';
 	import ghGIF from '$lib/assets/rate-us-on-gh.gif';
 
@@ -105,7 +105,7 @@
 		});
 	}
 
-	onMount(async () => {
+	onMount(() => {
 		loading = document.getElementById('loading');
 		display = document.getElementById('display');
 		intro = document.getElementById('intro');
@@ -115,11 +115,89 @@
 	});
 </script>
 
+<style>
+	:global(html),
+	:global(body),
+	:global(#app-root) {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		background: black;
+	}
+
+	.game-container {
+		position: absolute;
+		inset: 0;
+		width: 100vw;
+		height: 100vh;
+		margin: 0;
+		padding: 0;
+		background: black;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+	}
+
+	.loading-container,
+	.intro,
+	.display {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.spinner {
+		width: 80px;
+		height: 80px;
+	}
+
+	.display canvas {
+		width: 100%;
+		height: 100%;
+		display: block;
+	}
+
+	progress {
+		width: 80%;
+		height: 1rem;
+		margin-top: 1rem;
+	}
+
+	.disclaimer {
+		font-size: 0.75rem;
+		color: #aaa;
+		margin-top: 1rem;
+		max-width: 60ch;
+		text-align: center;
+	}
+
+	button {
+		margin-top: 1rem;
+		padding: 0.5rem 1rem;
+		font-size: 1rem;
+		cursor: pointer;
+	}
+
+	.intro p {
+		color: white;
+		max-width: 60ch;
+		text-align: center;
+	}
+</style>
+
 <div class="game-container">
 	<div id="loading" class="loading-container">
 		<img src={spinnerWhite} class="spinner" alt="Loading" />
 		<p class="text-center">Loading CheerpJ ...</p>
 	</div>
+
 	<div id="intro" class="intro">
 		<p>This is a proof-of-concept demo of Minecraft 1.2.5 running unmodified in the browser.</p>
 
@@ -139,6 +217,8 @@
 			This is not an official Minecraft product. It is not approved by or associated with Mojang or Microsoft.
 		</div>
 	</div>
+
 	<progress id="progress-bar"></progress>
+
 	<div id="display" class="display"></div>
 </div>
