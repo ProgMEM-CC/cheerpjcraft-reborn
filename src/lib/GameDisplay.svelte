@@ -105,7 +105,7 @@
 		});
 	}
 
-	onMount(async () => {
+	onMount(() => {
 		loading = document.getElementById('loading');
 		display = document.getElementById('display');
 		intro = document.getElementById('intro');
@@ -115,23 +115,105 @@
 	});
 </script>
 
+<style>
+	html, body {
+		margin: 0;
+		padding: 0;
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+		font-family: sans-serif;
+		background: black;
+		color: white;
+	}
+
+	.game-container {
+		width: 100vw;
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+	}
+
+	#display {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		display: none;
+	}
+
+	#display.show {
+		display: block;
+	}
+
+	.loading-container,
+	.intro {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 2;
+		text-align: center;
+		background: rgba(0, 0, 0, 0.8);
+		padding: 2rem;
+		border-radius: 1rem;
+	}
+
+	progress {
+		position: absolute;
+		bottom: 2rem;
+		width: 80%;
+		max-width: 600px;
+		z-index: 2;
+	}
+
+	button {
+		padding: 0.5rem 1rem;
+		font-size: 1rem;
+		cursor: pointer;
+		margin-top: 1rem;
+	}
+
+	.spinner {
+		width: 3rem;
+		height: 3rem;
+		margin-bottom: 1rem;
+	}
+
+	a {
+		color: #00aaff;
+	}
+
+	.disclaimer {
+		font-size: 0.8rem;
+		margin-top: 1.5rem;
+		color: #ccc;
+	}
+</style>
+
 <div class="game-container">
 	<div id="loading" class="loading-container">
 		<img src={spinnerWhite} class="spinner" alt="Loading" />
-		<p class="text-center">Loading CheerpJ ...</p>
+		<p>Loading CheerpJ ...</p>
 	</div>
+
 	<div id="intro" class="intro">
 		<p>This is a proof-of-concept demo of Minecraft 1.2.5 running unmodified in the browser.</p>
 
 		{#if !eulaAccepted}
 			<p>
 				<input type="checkbox" bind:checked={eulaAccepted} />
-				Before playing, you have to accept the <a href="https://www.minecraft.net/eula" target="_blank">Minecraft EULA</a>
+				Before playing, accept the <a href="https://www.minecraft.net/eula" target="_blank">Minecraft EULA</a>
 			</p>
 		{/if}
 
 		{#if eulaAccepted}
-			<p>Clicking the button below will download the client from mojang.com.</p>
+			<p>Click the button below to download the client from mojang.com.</p>
 			<button on:click={startGame}>Play!</button>
 		{/if}
 
@@ -139,6 +221,7 @@
 			This is not an official Minecraft product. It is not approved by or associated with Mojang or Microsoft.
 		</div>
 	</div>
+
 	<progress id="progress-bar"></progress>
 	<div id="display" class="display"></div>
 </div>
