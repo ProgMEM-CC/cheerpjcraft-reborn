@@ -14,7 +14,7 @@
 
 		<style>
 			/* Ensure full viewport usage */
-			html, body {
+			html, body, #app-root {
 				margin: 0;
 				padding: 0;
 				width: 100%;
@@ -27,6 +27,7 @@
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">
-		<div style="display: contents">%sveltekit.body%</div>
+		<!-- ✅ FIX: use a real container instead of display: contents -->
+		<div id="app-root">%sveltekit.body%</div>
 	</body>
 </html>
