@@ -1,29 +1,32 @@
 <script lang="ts">
 	import '../app.css'; 
-	import Nav from "labs/packages/global-navbar/src/Nav.svelte"
-	import GhLink from '$lib/GhLink.svelte';
 	import GameDisplay from '$lib/GameDisplay.svelte';
-	import PageControls from '$lib/PageControls.svelte';
-	import Footer from "$lib/Footer.svelte";
-	import SideParagraph from '$lib/SideParagraph.svelte';
 </script>
 
-<main>
-	<div class="nav-bar">
-		<Nav />
-	</div>
-	<div class="gh-container">
-		<GhLink />
-	</div>
-	<h1 class="title">BROWSERCRAFT</h1>
-	<div class="main-container">
-		<div>
-			<GameDisplay />
-			<PageControls />
-		</div>
-		<SideParagraph />
-	</div>
-	<div class="footer-container">
-		<Footer />
-	</div>
-</main>
+<style>
+	html, body {
+		margin: 0;
+		padding: 0;
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
+	}
+
+	.fullscreen-container {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		margin: 0;
+		padding: 0;
+		background: black;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+</style>
+
+<div class="fullscreen-container">
+	<GameDisplay />
+</div>
