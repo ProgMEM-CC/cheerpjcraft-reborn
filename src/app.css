@@ -95,8 +95,8 @@ main a:hover {
 	background: black;
 	color: #eee;
 	color-scheme: dark;
-	width: 800px;
-	height: 500px;
+	width: 100vh;
+	height: 100vh;
 }
 
 .game-container > progress {
