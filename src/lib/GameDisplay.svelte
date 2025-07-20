@@ -105,18 +105,147 @@
 		});
 	}
 
-	onMount(async () => {
+	onMount(() => {
 		loading = document.getElementById('loading');
 		display = document.getElementById('display');
 		intro = document.getElementById('intro');
 		progressBar = document.getElementById('progress-bar');
 
-		startCheerpJ();
+		// Defer initialization to next animation frame to prevent stuck
+		requestAnimationFrame(() => {
+			startCheerpJ();
+		});
 	});
 </script>
 
+<style>
+	/* Fullscreen foundation */
+	html, body {
+		height: 100%;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		font-family: system-ui, sans-serif;
+		background: black;
+	}
+
+	@font-face {
+		font-family: "Minecrafter";
+		src: url("/fonts/minecrafter/Minecrafter.Reg.woff2"), sans-serif;
+	}
+
+	main {
+		width: 100vw;
+		height: 100vh;
+		margin: 0;
+		padding: 0;
+		background: black;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.game-container {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background: black;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		color: #eee;
+		color-scheme: dark;
+	}
+
+	.display {
+		display: flex;
+		width: 100%;
+		height: 100%;
+		position: relative;
+	}
+
+	canvas {
+		width: 100%;
+		height: 100%;
+	}
+
+	.game-container > progress {
+		width: calc(100% - 2em);
+		margin: 1em;
+	}
+
+	.loading-container,
+	.intro,
+	.timeout-info,
+	.timeout-timer {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: none;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.timeout-info {
+		background-color: rgba(0, 0, 0, 0.8);
+		flex-direction: column;
+	}
+
+	.timeout-info > p {
+		max-width: 60ch;
+		text-align: center;
+		margin: 0.75rem 0;
+		color: white;
+	}
+
+	.timeout-info > h1 {
+		font-size: 2rem;
+		margin: 0;
+		color: white;
+	}
+
+	.timeout-info > img {
+		width: 80%;
+		border: 1px solid white;
+	}
+
+	.timeout-timer > p {
+		margin: 0 1rem 0 0;
+		font-size: 4rem;
+		color: white;
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+	}
+
+	.spinner {
+		width: 64px;
+		height: 64px;
+	}
+
+	.nav-bar,
+	.gh-container,
+	.footer-container,
+	.side-paragraph,
+	.pagecontrols,
+	.title,
+	.main-container {
+		display: none !important;
+	}
+
+	@media (max-width: 900px) {
+		html, body {
+			font-size: 0.9rem;
+		}
+	}
+</style>
+
 <div class="game-container">
-	<div id="loading" class="loading-container">
+	<div id="loading" class="loading-container" style="display:flex;">
 		<img src={spinnerWhite} class="spinner" alt="Loading" />
 		<p class="text-center">Loading CheerpJ ...</p>
 	</div>
