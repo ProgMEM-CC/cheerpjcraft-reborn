@@ -88,16 +88,19 @@ main a:hover {
 
 .game-container {
 	display: flex;
-	aspect-ratio: 4 / 3;
 	flex-direction: column;
 	align-items: center;
-	position: relative;
+	position: fixed; /* fixed to viewport */
+	top: 0;
+	left: 0;
+	width: 100vw;   /* full viewport width */
+	height: 100vh;  /* full viewport height */
 	background: black;
 	color: #eee;
 	color-scheme: dark;
-	width: 100vh;
-	height: 100vh;
+	overflow: hidden; /* prevent scrollbars */
 }
+
 
 .game-container > progress {
 	width: calc(100% - 2em);
